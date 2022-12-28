@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6grjsbdt7qkb"]
+
+[ext_resource type="PackedScene" uid="uid://caep7qsppvth7" path="res://scenes/common/point/Graph.tscn" id="1_debe0"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Graph" parent="." instance=ExtResource("1_debe0")]
+resolution = 40
+function = 4
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.741423, 0.474118, -0.474874, 0, 0.70767, 0.706544, 0.671038, 0.523847, -0.524682, -1.29054, 1.93137, -1.69051)
+size = 2.0
+far = 100.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.158652, 0.474162, 0, 0.948324, 0.317305, -0.5, -0.274794, 0.821272, 2.58068, 0.841255, -1.46455)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.849403, 0.309861, -0.427202, 0, 0.809485, 0.587141, 0.527745, -0.498719, 0.687579, -1.32182, 1.94195, 1.51631)

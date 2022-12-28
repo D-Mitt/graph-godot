@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ws7u0r84708q"]
+
+[ext_resource type="Shader" path="res://scenes/common/point/Point.gdshader" id="1_fh72f"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_fh72f")
+shader_parameter/metallic = 1.0
+shader_parameter/roughness = 0.5

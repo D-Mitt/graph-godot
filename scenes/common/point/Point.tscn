@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cty2ylew1f02y"]
+
+[ext_resource type="Material" uid="uid://ws7u0r84708q" path="res://scenes/common/point/Point_mat.tres" id="1_q5ifh"]
+
+[node name="Point" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+cast_shadow = 0
+material = ExtResource("1_q5ifh")
