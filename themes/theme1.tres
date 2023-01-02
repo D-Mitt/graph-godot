@@ -1,0 +1,5 @@
+[gd_resource type="Theme" format=3 uid="uid://b5bkbrnbpl0b0"]
+
+[resource]
+default_font_size = 12
+/font_sizes/StatsOverlayLabel = 14

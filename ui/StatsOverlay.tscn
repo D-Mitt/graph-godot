@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0ubpcfvxf0k"]
+
+[ext_resource type="Theme" uid="uid://b5bkbrnbpl0b0" path="res://themes/theme1.tres" id="1_88rd8"]
+[ext_resource type="Script" path="res://ui/FrameRateCounter.gd" id="1_aca5d"]
+
+[node name="StatsOverlay" type="Node2D"]
+script = ExtResource("1_aca5d")
+display_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 80.0
+offset_bottom = 100.0
+mouse_filter = 2
+color = Color(0.470588, 0.470588, 0.470588, 0.227451)
+
+[node name="FPSVertContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 80.0
+offset_bottom = 100.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/FPSVertContainer"]
+offset_right = 80.0
+offset_bottom = 100.0
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/FPSVertContainer/HBoxContainer"]
+offset_right = 80.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/FPSVertContainer/HBoxContainer/VBoxContainer"]
+offset_right = 80.0
+offset_bottom = 17.0
+theme = ExtResource("1_88rd8")
+bbcode_enabled = true
+text = "FPS"
+fit_content_height = true
+
+[node name="BestFPS" type="RichTextLabel" parent="CanvasLayer/FPSVertContainer/HBoxContainer/VBoxContainer"]
+offset_top = 21.0
+offset_right = 80.0
+offset_bottom = 38.0
+theme = ExtResource("1_88rd8")
+text = "000"
+fit_content_height = true
+
+[node name="AverageFPS" type="RichTextLabel" parent="CanvasLayer/FPSVertContainer/HBoxContainer/VBoxContainer"]
+offset_top = 42.0
+offset_right = 80.0
+offset_bottom = 59.0
+theme = ExtResource("1_88rd8")
+text = "000"
+fit_content_height = true
+
+[node name="WorstFPS" type="RichTextLabel" parent="CanvasLayer/FPSVertContainer/HBoxContainer/VBoxContainer"]
+offset_top = 63.0
+offset_right = 80.0
+offset_bottom = 80.0
+theme = ExtResource("1_88rd8")
+text = "000"
+fit_content_height = true
