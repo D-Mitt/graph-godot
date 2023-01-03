@@ -9,11 +9,14 @@ enum TransitionMode {CYCLE, RANDOM}
 @export_range(0.0, 100.0, 1.0, float) var function_duration : float = 1.0
 
 @export_enum("Cycle", "Random") var transition_mode
+@export_range(0.0, 100.0, 0.1, float) var transition_duration : float = 1.0
 
 @onready var functionLibrary = preload("res://scenes/common/graph/FunctionLibrary.gd")
 var funcLibraryInstance : FunctionLibrary
 var points : Array = []
 var duration : float = 0.0
+@onready var transitioning : bool = false
+@onready var transition_function
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -66,17 +69,50 @@ func _update_function():
 		
 		points[i].transform.origin = fn.call(u, v, time)
 		x += 1
+		
+func _update_function_transition():
+	#	time at start of frame in seconds
+	var time: float = (Time.get_ticks_msec()/1000.0)
+	var step: float = 2 / float(resolution)
+#	functionLibrary class is not  an object, so new() is required
+#	instance is needed because get_functions is not a static call (due to using Callable)
+	var from : Callable = funcLibraryInstance.get_function(transition_function)
+	var to : Callable = funcLibraryInstance.get_function(function)
+	var progress : float = duration / transition_duration
+	var x: int = 0
+	var z: int  = 0
+	var v : float = 0.5 * step - 1.0
+	
+	for i in range(points.size()):
+		if (x == resolution):
+			x = 0
+			z += 1
+			v = (z + 0.5) * step - 1.0
+			
+		var u : float = (x + 0.5) * step - 1.0
+		
+		points[i].transform.origin = funcLibraryInstance.morph(u, v, time, from, to, progress)
+		x += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	duration += delta
-	if duration >= function_duration:
+	
+	if transitioning and duration >= transition_duration:
+		duration -= transition_duration
+		transitioning = false
+	elif duration >= function_duration:
 #		This is done so that timings do not get out of hand, if we go over the frame duration,
 # 		We try to keep it in sync by removing some time on the next function
 		duration -= function_duration
+		transitioning = true
+		transition_function = function
 		_pick_next_function()
 		
-	_update_function()
+	if transitioning:
+		_update_function_transition()
+	else:
+		_update_function()
 	
 func _pick_next_function():
 	if function == transition_mode:
