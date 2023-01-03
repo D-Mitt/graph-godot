@@ -75,3 +75,8 @@ func get_random_function_name_other_than(name : FunctionName):
 		return 0
 	
 	return choice
+
+func morph(u : float, v : float, t : float, from : Callable, to : Callable, progress : float) -> Vector3:
+	var from_vector = from.call(u, v, t) as Vector3
+	var to_vector = to.call(u, v, t) as Vector3
+	return from_vector.lerp(to_vector, smoothstep(0.0, 1.0, progress))
